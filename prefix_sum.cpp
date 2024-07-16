@@ -4,19 +4,19 @@ template <std::integral T>
 class PrefixSum {
 public:
     PrefixSum(const std::vector<T>& data) {
-        prefix_sums.resize(data.size() + 1, 0);
-        std::partial_sum(data.begin(), data.end(), prefix_sums.begin() + 1);
+        prefix_sums_.resize(data.size() + 1, 0);
+        std::partial_sum(data.begin(), data.end(), prefix_sums_.begin() + 1);
     }
 
     T sum(size_t left, size_t right) const {
-        if (left > right || right >= prefix_sums.size() - 1) {
+        if (left > right || right >= prefix_sums_.size() - 1) {
             throw std::out_of_range("Invalid range");
         }
-        return prefix_sums[right + 1] - prefix_sums[left];
+        return prefix_sums_[right + 1] - prefix_sums_[left];
     }
 
 private:
-    std::vector<T> prefix_sums;
+    std::vector<T> prefix_sums_;
 };
 
 int main() {

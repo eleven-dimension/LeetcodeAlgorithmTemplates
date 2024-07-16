@@ -4,29 +4,29 @@ template <std::integral T>
 class UnionFind {
 public:
     UnionFind(T size) {
-        parent.resize(size);
-        rank.resize(size, 0);
-        std::iota(parent.begin(), parent.end(), 0);
+        parent_.resize(size);
+        rank_.resize(size, 0);
+        std::iota(parent_.begin(), parent_.end(), 0);
     }
 
     T find(T x) {
-        if (parent[x] != x) {
-            parent[x] = find(parent[x]);
+        if (parent_[x] != x) {
+            parent_[x] = find(parent_[x]);
         }
-        return parent[x];
+        return parent_[x];
     }
 
     void unite(T x, T y) {
-        T rootX = find(x);
-        T rootY = find(y);
-        if (rootX != rootY) {
-            if (rank[rootX] > rank[rootY]) {
-                parent[rootY] = rootX;
-            } else if (rank[rootX] < rank[rootY]) {
-                parent[rootX] = rootY;
+        T root_x = find(x);
+        T root_y = find(y);
+        if (root_x != root_y) {
+            if (rank_[root_x] > rank_[root_y]) {
+                parent_[root_y] = root_x;
+            } else if (rank_[root_x] < rank_[root_y]) {
+                parent_[root_x] = root_y;
             } else {
-                parent[rootY] = rootX;
-                rank[rootX]++;
+                parent_[root_y] = root_x;
+                rank_[root_x]++;
             }
         }
     }
@@ -36,8 +36,8 @@ public:
     }
 
 private:
-    std::vector<T> parent;
-    std::vector<T> rank;
+    std::vector<T> parent_;
+    std::vector<T> rank_;
 };
 
 int main() {
