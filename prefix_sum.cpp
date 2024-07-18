@@ -3,7 +3,7 @@
 template <class T>
 class PrefixSum {
 public:
-    PrefixSum(const std::vector<T> &data) {
+    PrefixSum(const std::vector<T>& data) {
         prefix_sums_.resize(data.size());
         std::partial_sum(data.begin(), data.end(), prefix_sums_.begin());
     }
