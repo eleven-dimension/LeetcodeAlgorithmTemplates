@@ -1,1 +1,7 @@
-.vscode/
+# Ignore all files.
+*
+
+# Except the following extensions.
+!*.cpp
+!*.md
+!.gitignore
