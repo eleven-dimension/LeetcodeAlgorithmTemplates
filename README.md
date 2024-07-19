@@ -6,5 +6,6 @@
 - [x] Binary Indexed Tree (Fenwick Tree)
 - [x] Discretization
 - [x] Floyd-Warshall Algorithm
+- [x] Integer Modulo Operation
 
 To be continued...
