@@ -1,6 +1,18 @@
 #include <bits/stdc++.h>
 
 template <class T>
+T FastPow(T base, size_t exponent, const T& one = 1) {
+    T res{one};
+    for (; exponent > 0; exponent /= 2) {
+        if (exponent % 2) {
+            res *= base;
+        }
+        base *= base;
+    }
+    return res;
+}
+
+template <class T>
 struct BiggerInteger {
     using Type = __int128_t;
 };
@@ -120,6 +132,11 @@ int main() {
 #pragma GCC diagnostic pop
 
         using ModBig = ModInteger<1000000007>;
-        std::cout << "No overflow and more simple:" << ModBig(1000000006) * 3 << std::endl;
+        std::cout << "No overflow and more simple: " << ModBig(1000000006) * 3 << std::endl;
+    }
+
+    {
+        using ModBig = ModInteger<1000000007>;
+        std::cout << "(2 ^ 10000) % (10 ^ 9 + 7) is " << (ModBig(2) ^ 10000) << std::endl;
     }
 }
