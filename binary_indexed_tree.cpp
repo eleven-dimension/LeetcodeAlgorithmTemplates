@@ -1,17 +1,22 @@
 #include <bits/stdc++.h>
 
-template<std::integral IndexType, typename ValueType>
+template <typename ValueType = int>
 class FenwickTree {
 public:
-    FenwickTree(IndexType size) : size_(size), tree_(size + 1, 0) {}
+    FenwickTree(size_t size) : tree_(size + 1) {}
 
-    void add(IndexType index, ValueType value) {
-        for (; index <= size_; index += lowbit(index)) {
+    void add(size_t index, ValueType value) {
+        for (size_t tree_size = size(); index <= tree_size; index += lowbit(index)) {
             tree_[index] += value;
         }
     }
 
-    ValueType sum(IndexType index) const {
+    ValueType rangeSum(size_t left, size_t right) const {
+        return sum(right) - sum(left - 1);
+    }
+
+private:
+    ValueType sum(size_t index) const {
         ValueType result = 0;
         for (; index > 0; index -= lowbit(index)) {
             result += tree_[index];
@@ -19,16 +24,14 @@ public:
         return result;
     }
 
-    ValueType rangeSum(IndexType left, IndexType right) const {
-        return sum(right) - sum(left - 1);
-    }
-
-private:
-    IndexType lowbit(IndexType x) const {
+    size_t lowbit(size_t x) const {
         return x & -x;
     }
 
-    IndexType size_;
+    size_t size() const {
+        return tree_.size() - 1;
+    }
+
     std::vector<ValueType> tree_;
 };
 
@@ -37,7 +40,7 @@ int main() {
     std::cin >> n >> m;
 
     std::vector<int> a(n + 1);
-    FenwickTree<size_t, int> fenwickTree(n);
+    FenwickTree fenwickTree(n);
 
     for (size_t i = 1; i <= n; i++) {
         std::cin >> a[i];
