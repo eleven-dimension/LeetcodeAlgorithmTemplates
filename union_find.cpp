@@ -5,7 +5,6 @@ class UnionFind {
 public:
     UnionFind(T size) {
         parent_.resize(size);
-        rank_.resize(size, 0);
         std::iota(parent_.begin(), parent_.end(), 0);
     }
 
@@ -19,16 +18,7 @@ public:
     void unite(T x, T y) {
         T root_x = find(x);
         T root_y = find(y);
-        if (root_x != root_y) {
-            if (rank_[root_x] > rank_[root_y]) {
-                parent_[root_y] = root_x;
-            } else if (rank_[root_x] < rank_[root_y]) {
-                parent_[root_x] = root_y;
-            } else {
-                parent_[root_y] = root_x;
-                rank_[root_x]++;
-            }
-        }
+        parent_[root_x] = root_y;
     }
 
     bool connected(T x, T y) {
@@ -37,11 +27,10 @@ public:
 
 private:
     std::vector<T> parent_;
-    std::vector<T> rank_;
 };
 
 int main() {
-    UnionFind<int> uf(10);
+    UnionFind uf(10);
 
     uf.unite(1, 2);
     uf.unite(2, 3);
@@ -50,6 +39,8 @@ int main() {
     std::cout << std::boolalpha;
     std::cout << "1 and 3 connected: " << uf.connected(1, 3) << std::endl;
     std::cout << "1 and 4 connected: " << uf.connected(1, 4) << std::endl;
+
+    std::cout << "1 and 5 connected: " << uf.connected(1, 5) << std::endl;
 
     uf.unite(3, 4);
 
