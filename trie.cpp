@@ -1,55 +1,55 @@
 #include <bits/stdc++.h>
 
-template <typename CharT>
-concept CharConcept = requires(CharT ch) {
-    std::is_integral_v<CharT>;
-};
-
-template <CharConcept CharT>
 class Trie {
 public:
-    Trie() : root_(new TrieNode()) {}
+    Trie() : root_(std::make_unique<TrieNode>()) {}
 
-    void insert(const std::basic_string<CharT>& word) {
+    void insert(const std::string& word) {
         TrieNode* node = root_.get();
         for (const auto& ch : word) {
-            if (!node->children_.contains(ch)) {
-                node->children_[ch] = std::make_unique<TrieNode>();
+            if (!node->children.contains(ch)) {
+                node->children[ch] = std::make_unique<TrieNode>();
             }
-            node = node->children_[ch].get();
-            node->prefix_count_++;
+            node = node->children[ch].get();
+            node->prefix_count++;
         }
-        node->is_end_ = true;
+        node->end_count++;
     }
 
-    bool search(const std::basic_string<CharT>& word) const {
+    size_t count(const std::string& word) const {
         const TrieNode* node = findNode(word);
-        return node != nullptr && node->is_end_;
+        return node != nullptr ? node->end_count : 0;
     }
 
-    bool startsWith(const std::basic_string<CharT>& prefix) const {
+    bool search(const std::string& word) const {
+        return count(word) > 0;
+    }
+
+    bool startsWith(const std::string& prefix) const {
         return findNode(prefix) != nullptr;
     }
 
-    size_t countWordsWithPrefix(const std::basic_string<CharT>& prefix) const {
+    size_t countWordsWithPrefix(const std::string& prefix) const {
         const TrieNode* node = findNode(prefix);
-        return node ? node->prefix_count_ : 0;
+        return node ? node->prefix_count : 0;
     }
 
 private:
+    // TODO(eleven-dimension, czsnb): Use a node pool to optimize performance.
     struct TrieNode {
-        std::unordered_map<CharT, std::unique_ptr<TrieNode>> children_;
-        bool is_end_ = false;
-        size_t prefix_count_ = 0;
+        std::unordered_map<char, std::unique_ptr<TrieNode>> children;
+        size_t end_count = 0;
+        size_t prefix_count = 0;
     };
 
-    const TrieNode* findNode(const std::basic_string<CharT>& str) const {
+    const TrieNode* findNode(const std::string& str) const {
         const TrieNode* node = root_.get();
-        for (const auto& ch : str) {
-            if (!node->children_.contains(ch)) {
+        for (char ch : str) {
+            auto child_iter = node->children.find(ch);
+            if (child_iter == node->children.end()) {
                 return nullptr;
             }
-            node = node->children_.at(ch).get();
+            node = child_iter->second.get();
         }
         return node;
     }
@@ -57,11 +57,10 @@ private:
     std::unique_ptr<TrieNode> root_;
 };
 
-
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
-    
+
     int T;
     std::cin >> T;
 
@@ -69,7 +68,7 @@ int main() {
         int n, m;
         std::cin >> n >> m;
 
-        Trie<char> trie;
+        Trie trie;
         for (int i = 1; i <= n; i++) {
             std::string s;
             std::cin >> s;
