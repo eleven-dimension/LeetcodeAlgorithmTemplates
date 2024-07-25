@@ -7,5 +7,6 @@
 - [x] Discretization
 - [x] Floyd-Warshall Algorithm
 - [x] Integer Modulo Operation
+- [x] Cache Decorator
 
 To be continued...
