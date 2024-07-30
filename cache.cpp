@@ -19,9 +19,8 @@ size_t HashCombine(size_t seed, const T& value) {
     return seed ^ (std::hash<T>{}(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2));
 }
 
-template <class... Types>
 struct TupleHash {
-    size_t operator()(const std::tuple<Types...>& tuple) const {
+    size_t operator()(const auto& tuple) const {
         size_t res = 0;
         std::apply([&res](const auto&... args) { ((res = HashCombine(res, args)), ...); }, tuple);
         return res;
@@ -50,7 +49,7 @@ public:
 private:
     std::function<R(This&, Args...)> func_;
 
-    std::unordered_map<std::tuple<Args...>, R, TupleHash<Args...>> value_map_;
+    std::unordered_map<std::tuple<Args...>, R, TupleHash> value_map_;
 };
 
 int main() {
