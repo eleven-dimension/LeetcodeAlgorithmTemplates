@@ -18,8 +18,6 @@ public:
         }
     }
 
-    size_t GetKthPrime(size_t k) const { return primes_.at(k - 1); }
-
     vector<size_t> GetPrimes() const { return primes_; }
 
     vector<bool> GetIsPrime() const { return is_prime_; }
@@ -38,11 +36,12 @@ int main() {
     cin >> n >> q;
     
     LinearSieve sieve(n);
+    auto&& primes = sieve.GetPrimes();
     
     for (int i = 0; i < q; ++i) {
         int k;
         cin >> k;
-        cout << sieve.GetKthPrime(k) << endl;
+        cout << primes[k - 1] << endl;
     }
 
     return 0;
