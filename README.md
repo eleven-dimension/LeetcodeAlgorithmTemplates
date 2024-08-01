@@ -8,5 +8,8 @@
 - [x] Floyd-Warshall Algorithm
 - [x] Integer Modulo Operation
 - [x] Cache Decorator
+- [x] Adjacency List 
+- [x] Dijkstra's Algorithm
+- [x] Linear Sieve (Euler Sieve)
 
 To be continued...
