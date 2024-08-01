@@ -3,24 +3,32 @@ using namespace std;
 
 class LinearSieve {
 public:
-    LinearSieve(size_t n) : is_prime_(n, true) {
+    LinearSieve(size_t n) : is_prime_(n + 1, true) {
+        primes_.reserve(n / std::log(n));
         is_prime_[0] = is_prime_[1] = false;
-        for (size_t i = 2; i < n; i++) {
+        for (size_t i = 2; i <= n; i++) {
             if (is_prime_[i]) {
                 primes_.emplace_back(i);
             }
-            for (size_t j = 0; j < primes_.size() && i * primes_[j] < n; j++) {
-                is_prime_[i * primes_[j]] = false;
-                if (i % primes_[j] == 0) {
+            for (size_t j : primes_) {
+                if (i * j > n) {
+                    break;
+                }
+                is_prime_[i * j] = false;
+                if (i % j == 0) {
                     break;
                 }
             }
         }
     }
 
-    vector<size_t> GetPrimes() const { return primes_; }
+    const vector<size_t>& GetPrimes() const {
+        return primes_;
+    }
 
-    vector<bool> GetIsPrime() const { return is_prime_; }
+    const vector<bool>& GetIsPrime() const {
+        return is_prime_;
+    }
 
 private:
     vector<bool> is_prime_;
@@ -34,10 +42,10 @@ int main() {
 
     int n, q;
     cin >> n >> q;
-    
+
     LinearSieve sieve(n);
-    auto&& primes = sieve.GetPrimes();
-    
+    const auto& primes = sieve.GetPrimes();
+
     for (int i = 0; i < q; ++i) {
         int k;
         cin >> k;
