@@ -2,11 +2,11 @@
 
 struct Range {
     long long l, r;
-	mutable long long v;
+    mutable long long v;
 
-	Range(long long left, long long right = -1, long long val = 0) : l(left), r(right), v(val) {}
+    Range(long long left, long long right = -1, long long val = 0) : l(left), r(right), v(val) {}
 
-	bool operator < (const Range& ano) const { return l < ano.l; }
+    bool operator < (const Range& ano) const { return l < ano.l; }
 };
 
 class ChthollyTree {
@@ -100,44 +100,44 @@ ll n, m;
 ll seed, vmax;
 
 ll rd() {
-	ll res = seed;
-	seed = (seed * 7 + 13) % MOD;
-	return res;
+    ll res = seed;
+    seed = (seed * 7 + 13) % MOD;
+    return res;
 }
 
 ll t[MaxN];
 
 int main() {
     ChthollyTree tree;
-	cin >> n >> m >> seed >> vmax;
+    cin >> n >> m >> seed >> vmax;
 
-	for (ll i = 1; i <= n; i++) {
-		t[i] = (rd() % vmax) + 1;
-		tree.Insert(i, i, t[i]);
-	}
+    for (ll i = 1; i <= n; i++) {
+        t[i] = (rd() % vmax) + 1;
+        tree.Insert(i, i, t[i]);
+    }
 
-	tree.Insert(n + 1, n + 1, 0);
-	for (ll i = 1; i <= m; ++i) {
-		ll op = ll(rd() % 4) + 1;
-		ll l = ll(rd() % n) + 1;
-		ll r = ll(rd() % n) + 1;
+    tree.Insert(n + 1, n + 1, 0);
+    for (ll i = 1; i <= m; ++i) {
+        ll op = ll(rd() % 4) + 1;
+        ll l = ll(rd() % n) + 1;
+        ll r = ll(rd() % n) + 1;
 
-		if (l > r) {
+        if (l > r) {
             swap(l, r);
         }
 
-		ll x, y;
-		if (op == 3) {
+        ll x, y;
+        if (op == 3) {
             x = int(rd() % (r - l + 1)) + 1;
         } else {
             x = int(rd() % vmax) + 1;
         }
 
-		if (op == 4) {
+        if (op == 4) {
             y = int(rd() % vmax) + 1;
         }
 
-		if (op == 1) {
+        if (op == 1) {
             tree.Add(l, r, x);
         } else if (op == 2) {
             tree.Assign(l, r, x);
