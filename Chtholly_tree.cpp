@@ -146,5 +146,5 @@ int main() {
         } else {
             cout << tree.Sum(l, r, x, y) << endl;
         }
-	}
+    }
 }
