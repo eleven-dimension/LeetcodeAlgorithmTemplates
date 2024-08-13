@@ -11,5 +11,6 @@
 - [x] Adjacency List 
 - [x] Dijkstra's Algorithm
 - [x] Linear Sieve (Euler Sieve)
+- [x] Chtholly Tree
 
 To be continued...
