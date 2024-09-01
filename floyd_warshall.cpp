@@ -22,7 +22,7 @@ public:
     }
 
     void addEdge(size_t from, size_t to, WeightType weight, bool bidirected) {
-        (bidirected ? addBidirectedEdge : addDirectedEdge)(from, to, weight);
+        (bidirected ? this->addBidirectedEdge : this->addDirectedEdge)(from, to, weight);
     }
 
     void computeShortestPaths() {
