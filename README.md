@@ -18,7 +18,7 @@
 - [x] Segment Tree (point update & range query)
 - [x] Sparse Table
 - [x] Binary Search on Answer
-- [ ] Binary Search in Segment Tree
+- [ ] Binary Search on Segment Tree
 - [ ] Segment Tree (range update)
 - [ ] Dynamic Segment Tree (Lazy Node Creation)
 - [ ] Computational Geometry
