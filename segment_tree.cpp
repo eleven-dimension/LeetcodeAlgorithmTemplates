@@ -6,10 +6,8 @@
 #include <limits>
 
 template <class T, auto op, auto e>
+requires std::is_invocable_r_v<T, decltype(op), T, T> && std::is_invocable_r_v<T, decltype(e)>
 class SegmentTree {
-    static_assert(std::is_convertible_v<decltype(op), std::function<T(T, T)>>, "op must work as T(T, T)");
-    static_assert(std::is_convertible_v<decltype(e), std::function<T()>>, "e must work as T()");
-
 public:
     SegmentTree() : SegmentTree(0) {}
     SegmentTree(size_t n) : SegmentTree(std::vector<T>(n, e())) {}

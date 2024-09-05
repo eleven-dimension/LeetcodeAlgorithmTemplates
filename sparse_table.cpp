@@ -51,10 +51,8 @@ namespace fast_io {
 }
 
 template <class T, auto op, auto e>
+requires std::is_invocable_r_v<T, decltype(op), T, T> && std::is_invocable_r_v<T, decltype(e)>
 class SparseTable {
-    static_assert(std::is_convertible_v<decltype(op), std::function<T(T, T)>>, "op must work as T(T, T)");
-    static_assert(std::is_convertible_v<decltype(e), std::function<T()>>, "e must work as T()");
-
 public:
     SparseTable() : SparseTable(0) {}
     SparseTable(size_t n) : SparseTable(std::vector<T>(n, e())) {}
