@@ -20,7 +20,7 @@ public:
 
     // [l, r)
     T Prod(size_t l, size_t r) {
-        assert(0 <= l && l <= r && r <= n_);
+        assert(0 <= l && l < r && r <= n_);
         return DoProd(1, l, r - 1, 0, n_ - 1);
     }
 
