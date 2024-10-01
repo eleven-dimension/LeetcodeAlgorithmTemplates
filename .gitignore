@@ -5,3 +5,4 @@
 !*.cpp
 !*.md
 !.gitignore
+!.clang-format
