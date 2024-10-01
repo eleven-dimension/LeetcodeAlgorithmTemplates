@@ -4,5 +4,6 @@
 # Except the following extensions.
 !*.cpp
 !*.md
+!*.sh
 !.gitignore
 !.clang-format
