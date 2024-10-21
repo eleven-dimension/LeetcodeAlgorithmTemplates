@@ -23,5 +23,6 @@
 - [ ] Dynamic Segment Tree (Lazy Node Creation)
 - [ ] Computational Geometry
 - [x] Splay
+- [x] String Hashing
 
 To be continued...
