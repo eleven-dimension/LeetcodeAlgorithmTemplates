@@ -84,10 +84,8 @@ class StringHash {
     base_power_mod_1_[0] = base_power_mod_2_[0] = 1;
 
     for (int i = 1; i <= n_; ++i) {
-      forward_hash_1_[i] =
-          (forward_hash_1_[i - 1] * kBase + (s_[i] - 'a' + 1)) % mod_1_;
-      forward_hash_2_[i] =
-          (forward_hash_2_[i - 1] * kBase + (s_[i] - 'a' + 1)) % mod_2_;
+      forward_hash_1_[i] = (forward_hash_1_[i - 1] * kBase + s_[i]) % mod_1_;
+      forward_hash_2_[i] = (forward_hash_2_[i - 1] * kBase + s_[i]) % mod_2_;
       base_power_mod_1_[i] = base_power_mod_1_[i - 1] * kBase % mod_1_;
       base_power_mod_2_[i] = base_power_mod_2_[i - 1] * kBase % mod_2_;
     }
@@ -96,10 +94,8 @@ class StringHash {
       reverse_hash_1_[n_ + 1] = reverse_hash_2_[n_ + 1] = 0;
 
       for (int i = n_; i >= 1; --i) {
-        reverse_hash_1_[i] =
-            (reverse_hash_1_[i + 1] * kBase + (s_[i] - 'a' + 1)) % mod_1_;
-        reverse_hash_2_[i] =
-            (reverse_hash_2_[i + 1] * kBase + (s_[i] - 'a' + 1)) % mod_2_;
+        reverse_hash_1_[i] = (reverse_hash_1_[i + 1] * kBase + s_[i]) % mod_1_;
+        reverse_hash_2_[i] = (reverse_hash_2_[i + 1] * kBase + s_[i]) % mod_2_;
       }
     }
   }
