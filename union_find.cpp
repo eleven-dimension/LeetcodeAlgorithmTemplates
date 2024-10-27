@@ -8,20 +8,20 @@ class UnionFind {
     std::iota(parent_.begin(), parent_.end(), 0);
   }
 
-  T find(T x) {
+  T Find(T x) {
     if (parent_[x] != x) {
-      parent_[x] = find(parent_[x]);
+      parent_[x] = Find(parent_[x]);
     }
     return parent_[x];
   }
 
-  void unite(T x, T y) {
-    T root_x = find(x);
-    T root_y = find(y);
+  void Unite(T x, T y) {
+    T root_x = Find(x);
+    T root_y = Find(y);
     parent_[root_x] = root_y;
   }
 
-  bool connected(T x, T y) { return find(x) == find(y); }
+  bool Connected(T x, T y) { return Find(x) == Find(y); }
 
  private:
   std::vector<T> parent_;
@@ -30,17 +30,17 @@ class UnionFind {
 int main() {
   UnionFind uf(10);
 
-  uf.unite(1, 2);
-  uf.unite(2, 3);
-  uf.unite(4, 5);
+  uf.Unite(1, 2);
+  uf.Unite(2, 3);
+  uf.Unite(4, 5);
 
   std::cout << std::boolalpha;
-  std::cout << "1 and 3 connected: " << uf.connected(1, 3) << std::endl;
-  std::cout << "1 and 4 connected: " << uf.connected(1, 4) << std::endl;
+  std::cout << "1 and 3 connected: " << uf.Connected(1, 3) << std::endl;
+  std::cout << "1 and 4 connected: " << uf.Connected(1, 4) << std::endl;
 
-  std::cout << "1 and 5 connected: " << uf.connected(1, 5) << std::endl;
+  std::cout << "1 and 5 connected: " << uf.Connected(1, 5) << std::endl;
 
-  uf.unite(3, 4);
+  uf.Unite(3, 4);
 
-  std::cout << "1 and 5 connected: " << uf.connected(1, 5) << std::endl;
+  std::cout << "1 and 5 connected: " << uf.Connected(1, 5) << std::endl;
 }
