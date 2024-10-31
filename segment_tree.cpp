@@ -15,7 +15,7 @@ class SegmentTree {
   SegmentTree(size_t n) : SegmentTree(std::vector<T>(n, e())) {}
 
   SegmentTree(const std::vector<T>& v) : n_(v.size()) {
-    data_ = std::vector<T>(n_ * 4 + 0x0430, e());
+    data_ = std::vector<T>(n_ * 4, e());
     Build(1, 0, n_ - 1, v);
   }
 
