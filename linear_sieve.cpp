@@ -4,6 +4,13 @@ using namespace std;
 class LinearSieve {
  public:
   LinearSieve(size_t n) : is_prime_(n + 1, true) {
+    is_prime_[0] = false;
+    if (n >= 1) {
+      is_prime_[1] = false;
+    }
+    if (n < 2) {
+      return;
+    }
     primes_.reserve(n / std::log(n));
     is_prime_[0] = is_prime_[1] = false;
     for (size_t i = 2; i <= n; i++) {
