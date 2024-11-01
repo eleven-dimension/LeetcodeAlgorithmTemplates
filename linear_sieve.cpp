@@ -12,7 +12,6 @@ class LinearSieve {
       return;
     }
     primes_.reserve(n / std::log(n));
-    is_prime_[0] = is_prime_[1] = false;
     for (size_t i = 2; i <= n; i++) {
       if (is_prime_[i]) {
         primes_.emplace_back(i);
