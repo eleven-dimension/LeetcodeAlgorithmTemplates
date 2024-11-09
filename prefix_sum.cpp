@@ -3,12 +3,19 @@
 template <class T>
 class PrefixSum {
  public:
+  using SumType = typename std::conditional<std::is_same<T, int>::value,
+                                            long long, T>::type;
+
   PrefixSum(const std::vector<T>& data) {
     prefix_sums_.resize(data.size());
-    std::partial_sum(data.begin(), data.end(), prefix_sums_.begin());
+    SumType acc = 0;
+    for (size_t i = 0; i < data.size(); ++i) {
+      acc += data[i];
+      prefix_sums_[i] = acc;
+    }
   }
 
-  T Sum(size_t left, size_t right) const {
+  SumType Sum(size_t left, size_t right) const {
     if (left > right || right >= prefix_sums_.size()) {
       throw std::out_of_range("Invalid range");
     }
@@ -16,7 +23,7 @@ class PrefixSum {
   }
 
  private:
-  std::vector<T> prefix_sums_;
+  std::vector<SumType> prefix_sums_;
 };
 
 int main() {
