@@ -2,6 +2,7 @@
 
 - [x] 1D Prefix Sum
 - [x] 2D Prefix Sum
+- [x] 1D Difference
 - [x] Disjoint Set (Union Find Algorithm)
 - [x] Trie
 - [x] Binary Indexed Tree (Fenwick Tree)
