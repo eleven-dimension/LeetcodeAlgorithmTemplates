@@ -60,7 +60,10 @@ class ModInteger final {
 
   constexpr Type operator*(const Type& rhs) const {
     if constexpr (Safer) {
-      if (rhs.val_ != 0 && val_ < std::numeric_limits<T>::max() / rhs.val_) {
+      if (rhs.val_ == 0) {
+        return 0;
+      }
+      if (val_ < std::numeric_limits<T>::max() / rhs.val_) {
         return val_ * rhs.val_;
       }
       return BiggerType(val_) * BiggerType(rhs.val_);
