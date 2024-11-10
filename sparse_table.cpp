@@ -59,13 +59,14 @@ class SparseTable {
 
   SparseTable(size_t n) : SparseTable(std::vector<T>(n, e())) {}
 
-  SparseTable(const std::vector<T>& v) : n_(v.size()), m_(log2(v.size())) {
+  SparseTable(const std::vector<T>& v) : n_(v.size()) {
+    m_ = n_ > 0 ? static_cast<size_t>(std::floor(std::log2(n_))) + 1 : 0;
     table_ = std::vector<std::vector<T>>(n_, std::vector<T>(m_, e()));
     for (size_t i = 0; i < n_; i++) {
       table_[i][0] = v[i];
     }
-    for (size_t j = 1; j <= m_; j++) {
-      for (size_t i = 0; i <= n_ - (1 << j); i++) {
+    for (size_t j = 1; j < m_; j++) {
+      for (size_t i = 0; i + (1 << j) <= n_; i++) {
         table_[i][j] = op(table_[i][j - 1], table_[i + (1 << (j - 1))][j - 1]);
       }
     }
