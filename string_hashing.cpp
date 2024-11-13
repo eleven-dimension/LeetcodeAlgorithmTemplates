@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 
+// NOTE: index starts from 1: str[1, 2, ..., len]
 enum class HashType { ONE_WAY, TWO_WAY };
 
 class StringHash {
