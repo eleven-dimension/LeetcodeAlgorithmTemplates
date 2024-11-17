@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 
+// NOTE: index starts from 1.
 template <typename ValueType = int>
 class FenwickTree {
  public:
