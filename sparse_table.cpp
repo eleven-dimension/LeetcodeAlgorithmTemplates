@@ -50,6 +50,7 @@ inline void writee(T x) {
 }
 }  // namespace fast_io
 
+// [l, r)
 template <class T, auto op, auto e>
   requires std::is_invocable_r_v<T, decltype(op), T, T> &&
            std::is_invocable_r_v<T, decltype(e)>
